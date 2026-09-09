@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halloween 2026 - Alerte Biologique au CNDA</title>
+  <!-- Inclusion de la bibliothèque SheetJS (XLSX) pour l'export Excel -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <style>
+    body { 
+      background-color: #030805; 
+      color: #fff; 
+      font-family: 'Calibri', Arial, sans-serif; 
+      text-align: center; 
+      margin: 0; 
+      padding: 0; 
+      overflow-x: hidden; 
+    }
+
+    /* BANDEAU PERMANENT HAUT DE PAGE */
+    #top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 60px;
+      background: rgba(0, 10, 5, 0.98);
+      border-bottom: 2px solid #008b43;
+      box-shadow: 0 0 15px #008b43;
+      z-index: 10000;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 15px;
+      box-sizing: border-box;
+    }
+
+    .top-bar-title {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-align: left;
+    }
+
+    .top-bar-title ul {
+      margin: 2px 0 0 0;
+      padding-left: 0;
+      list-style: none;
+      font-size: 0.75rem;
+      color: #00ff66;
+    }
+
+    /* BOUTON BURGER */
+    .burger-menu-btn {
+      background: #004a22;
+      color: #00ff66;
+      border: 1px solid #00ff66;
+      padding: 8px 12px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none; /* Masqué par défaut sur grand écran */
+      font-family: inherit;
+    }
+
+    /* CONTENEUR DES LIENS DE NAVIGATION */
+    .nav-links-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-nav {
+      background: #004a22;
+      color: #fff;
+      border: 1px solid #00ff66;
+      padding: 6px 12px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .btn-nav:hover { background: #008b43; }
+
+    .cnda-select-top {
+      background: #001108;
+      color: #33ff99;
+      border: 1px solid #00ff66;
+      font-family: inherit;
+      font-size: 0.8rem;
+      padding: 5px;
+      cursor: pointer;
+      max-width: 200px;
+    }
+
+    .cnda-select-top optgroup {
+      background: #002211;
+      color: #88ffbb;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    /* RESPONSIVE DESIGN POUR LES ÉCRANS MOBILES */
+    @media screen and (max-width: 900px) {
+      .burger-menu-btn {
+        display: block;
+      }
+      .nav-links-container {
+        display: none; /* Caché par défaut sur mobile */
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding-top: 15px;
+        padding-bottom: 10px;
+        border-top: 1px solid #004a22;
+        margin-top: 10px;
+      }
+      .nav-links-container.active {
+        display: flex; /* S'affiche lorsqu'on clique sur le burger */
+      }
+      .cnda-select-top {
+        max-width: 100%;
+        width: 100%;
+      }
+      .page-view {
+        padding-top: 130px !important; /* Ajustement dynamique si le menu s'ouvre */
+      }
+    }
+    
+    /* LAYOUT GENERAL DES PAGES */
+    .page-view { 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 100vh; 
+      padding: 90px 20px 40px 20px; 
+      box-sizing: border-box; 
+    }
+
+    .container { 
+      border: 2px solid #008b43; 
+      padding: 30px; 
+      max-width: 950px; 
+      width: 100%; 
+      background: rgba(0, 17, 8, 0.9); 
+      box-shadow: 0 0 30px #008b43; 
+      text-align: left; 
+      box-sizing: border-box;
+    }
+
+    h1 { 
+      color: #33ff99; 
+      font-size: 1.8rem; 
+      margin-top: 0; 
+      letter-spacing: 2px; 
+      text-align: center; 
+      border-bottom: 1px solid #008b43;
+      padding-bottom: 15px;
+    }
+
+    .contexte-box {
+      color: #ccc;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 25px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-left: 3px solid #00ff66;
+    }
+
+    .news-card {
+      background: rgba(0, 30, 15, 0.6);
+      border: 1px solid #00ff66;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: inset 0 0 10px #008b43;
+    }
+    .news-tag { color: #33ff99; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 5px; }
+    .news-title { color: #fff; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px; }
+    .news-body { color: #ddd; font-size: 0.95rem; line-height: 1.4; margin: 0; }
+
+    .btn-standard { 
+      background: #004a22; 
+      color: white; 
+      padding: 15px 30px; 
+      border: 1px solid #00ff66; 
+      font-size: 1rem; 
+      font-weight: bold; 
+      cursor: pointer; 
+      box-shadow: 0 0 10px #008b43; 
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    .btn-standard:hover { background: #008b43; }
+
+    .btn-vote-anim { 
+      background: #8b0000; 
+      color: white; 
+      padding: 18px 36px; 
+      border: 2px solid #ff0000; 
+      font-size: 1.1rem; 
+      font-weight: bold; 
+      cursor: pointer; 
+      box-shadow: 0 0 15px #ff0000; 
+      animation: heartbeat 0.83s infinite ease-in-out; 
+      font-family: inherit;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); box-shadow: 0 0 10px #ff0000; }
+      14% { transform: scale(1.08); box-shadow: 0 0 25px #ff3333; }
+      28% { transform: scale(1.02); box-shadow: 0 0 15px #ff0000; }
+      42% { transform: scale(1.14); box-shadow: 0 0 35px #ff3333; }
+      70% { transform: scale(1); box-shadow: 0 0 10px #ff0000; }
+      100% { transform: scale(1); box-shadow: 0 0 10px #ff0000; }
+    }
+
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 10002; justify-content: center; align-items: center; }
+    .modal-content { background: #001108; border: 2px solid #00ff66; padding: 25px; max-width: 800px; width: 90%; text-align: left; max-height: 80vh; overflow-y: auto; line-height: 1.4; font-size: 0.9rem; }
+    .modal-content h3 { color: #33ff99; margin-top: 15px; margin-bottom: 5px; font-size: 1rem; text-transform: uppercase; border-bottom: 1px solid #004a22; }
+    .close-modal { color: #00ff66; float: right; cursor: pointer; font-weight: bold; font-size: 1.2rem; }
+
+    #screamer-box, #second-screamer-box { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: black; z-index: 9999; }
+    #screamer-video, #second-screamer-video { width: 100%; height: 100%; object-fit: cover; }
+    #revelation, #second-revelation { display: none; }
+    .role-badge { display: inline-block; background: #00ff66; color: #030805; padding: 8px 16px; font-weight: bold; margin-top: 10px; border-radius: 4px; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+  <!-- BANDEAU HAUT PERMANENT -->
+  <header id="top-bar">
+  <div style="background:#030805 ; padding: 0px; display: inline-block; border: 2px solid #008b43; box-shadow: 0 0 20px #008b43;">
+  <svg width="280" height="90" viewBox="0 0 480 150" style="font-family: 'Calibri', Arial, sans-serif;">
+   
+   <!-- Logo Cercles -->
+    <g transform="translate(15, 0)">
+    <!-- Cercles qui entourent -->  
+      <circle cx="75" cy="75" r="50" fill="none" stroke="#00ff66" stroke-width="5" opacity="0.8"/>
+    <!-- Cercles entrelacés -->  
+      <circle cx="75" cy="60" r="25" fill="none" stroke="#ff9900" stroke-width="2.5"/>
+      <circle cx="65" cy="82" r="25" fill="none" stroke="#ff9900" stroke-width="2.5"/>
+      <circle cx="85" cy="82" r="25" fill="none" stroke="#ff9900" stroke-width="2.5"/>
+    </g>
+
+    <!-- Ligne de séparation -->
+    <line x1="160" y1="20" x2="160" y2="130" stroke="#00ff66" stroke-width="2" />
+
+    <!-- Sigle vertical CNDA en orange -->
+    <text x="180" y="45" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">C</tspan><tspan fill="#ffffff">abinet de</tspan></text>
+    <text x="180" y="70" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">N</tspan><tspan fill="#ffffff">eutralisation et</tspan></text>
+    <text x="180" y="95" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">D</tspan><tspan fill="#ffffff">écontamination des</tspan></text>
+    <text x="180" y="120" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">A</tspan><tspan fill="#ffffff">fflictions</tspan></text>
+    </svg>
+    </div>
+
+    <!-- BOUTON BURGER MOBILE -->
+    <button class="burger-menu-btn" onclick="toggleBurgerMenu()">☰</button>
+
+    <!-- CONTENEUR DES ÉLÉMENTS DU MENU -->
+    <div id="nav-links" class="nav-links-container">
+      <button class="btn-nav" onclick="openModal('modal-histoire')">📖 HISTOIRE</button>
+      <button class="btn-nav" onclick="openModal('modal-regles')">📜 RÈGLES DU JEU</button>
+
+    <!-- LISTE DÉROULANTE PERSONNALISÉE -->
+     <div class="nav-item">
+  <select class="cnda-select-top" onchange="ouvrirFicheRole(this)">
+    <option value="">📋 FICHES DES RÔLES</option>
+    <optgroup label="🧑‍⚕️ Le Personnel du CNDA">
+      <option value="modal-fiche-01">Les Scientifiques</option>
+      <option value="modal-fiche-02">Le Directeur du CNDA</option>
+      <option value="modal-fiche-03">Les Infirmiers Jumeaux</option>
+      <option value="modal-fiche-04">Le Radiologue</option>
+      <option value="modal-fiche-05">La Pharmacienne</option>
+      <option value="modal-fiche-06">Le Responsable Quarantaine</option>
+      <option value="modal-fiche-07">Le Chirurgien Vétéran</option>
+      <option value="modal-fiche-08">La Jeune Stagiare</option>
+      <option value="modal-fiche-09">Le Virologiste</option>
+    </optgroup>
+    <optgroup label="🧟 Les Infectés">
+      <option value="modal-fiche-10">Les Infectés</option>
+      <option value="modal-fiche-11">Le Patient Zéro</option>
+    </optgroup>
+    <optgroup label="🧛 Les Vampires">
+      <option value="modal-fiche-12">Les Vampires</option>
+      <option value="modal-fiche-13">Le Comte Alucard</option>
+    </optgroup>
+    <optgroup label="👻 Les Fantômes">
+      <option value="modal-fiche-14">Les Fantômes</option>
+    </optgroup>
+  </select>
+</div>
+
+      <div class="nav-item">
+        <select id="vote-dropdown" class="cnda-select-top" onchange="changerJournees(this.value)">
+          <!-- Généré dynamiquement -->
+        </select>
+      </div>
+
+      <div class="nav-item">
+        <select id="news-dropdown" class="cnda-select-top" onchange="afficherNewsModal(this.value)">
+          <!-- Généré dynamiquement -->
+        </select>
+      </div>
+
+        <button class="btn-nav" onclick="basculerPageMiniJeux()">🕹️ MINI JEUX</button>
+      </div>
+  </header>
+
+  <!-- AUDIOS PREMIÈRE SECTION -->
+  <audio id="accueil-sound" src="accueil.mp3" loop preload="auto"></audio>
+  <audio id="heartbeat-sound" src="heartbeat.mp3" loop preload="auto"></audio>
+  <audio id="reveal-sound" src="reveal.mp3" preload="auto"></audio>
+  <audio id="music-revelation" src="ambiance_revelation.mp3" loop preload="auto"></audio>
+
+  <!-- AUDIOS SECONDE SECTION -->
+  <audio id="second-heartbeat-sound" src="second_heartbeat.mp3" loop preload="auto"></audio>
+  <audio id="second-reveal-sound" src="second_reveal.mp3" preload="auto"></audio>
+  <audio id="music-second-revelation" src="second_ambiance_revelation.mp3" loop preload="auto"></audio>
+
+  <!-- 1. PAGE D'ACCUEIL -->
+  <div id="accueil" class="page-view">
+    <div class="container">
+      <h1>🎃 HALLOWEEN 2026 🎃</h1>
+      <div class="contexte-box">
+        <strong>👔 Directeur du CNDA : <span style="color: #00ffff;">David FLECHE</span></strong><br>
+        <ul>
+          <li><strong><span style="color: #ffd700;">Voix Prépondérante</span></strong> : Son vote compte double</li>
+          <li><strong><span style="color: #ffd700;">Droit de Tranchage</span></strong> : En cas d'égalité, il tranche.</li>
+          <li><strong><span style="color: #ffd700;">Badge Haute Sécurité</span></strong> : À sa mort, il désigne un joueur qui hérite de ses pouvoirs.</li>
+        </ul>  
+      </div>
+
+        <!-- SECTION URNE DE VOTE INTERACTIVE -->
+        <div class="news-card" style="border-color: #00ff66;">
+          <div class="news-tag" style="text-align: center; margin-bottom: 5px;">
+            🗳️ URNE DES VOTES 🗳️
+          </div>
+          <div class="news-title" style="text-align: center;">
+            Le scrutin est ouvert
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <select id="select-votant" style="flex: 1; min-width: 200px; background: #001108; color: #fff; border: 1px solid #008b43; padding: 8px; font-family: inherit; cursor: pointer;">
+                <option value="">Sélectionner votre nom d'agent...</option>
+              </select>
+              
+              <select id="select-cible" style="flex: 1; min-width: 200px; background: #001108; color: #33ff99; border: 1px solid #00ff66; padding: 8px; font-family: inherit; cursor: pointer;">
+                <option value="">Désigner la cible à euthanasier...</option>
+              </select>
+            </div>
+            
+            <button id="btn-valider-vote" class="btn-standard" onclick="enregistrerVoteLocal()" style="background: #b35900; border-color: #ff9900; padding: 5px; font-size: 0.9rem;">
+			      VALIDER VOTRE CHOIX
+			      </button>
+          </div>
+          
+          <div id="confirmation-vote" style="color: #00ff66; font-size: 0.85rem; margin-top: 10px; display: none;">
+            ✓ Vote enregistré dans les registres du CNDA
+          </div>
+
+          <div style="margin-top: 20px; border-top: 1px dashed #008b43; padding-top: 15px;">
+            <button class="btn-standard" onclick="afficherRecapVotes()" style="padding: 8px 15px; font-size: 0.8rem; background: #002211;">
+              🔒
+            </button>
+            <div id="liste-recap-votes" style="color: #ccc; font-size: 0.85rem; margin-top: 10px; text-align: left; display: none; background: #000a05; padding: 10px; border: 1px solid #004a22;">
+            </div>
+          </div>
+        </div>
+
+      <div style="margin-top: 20px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; width: 100%;">
+		<button id="home-to-vote-btn" class="btn-standard" onclick="ouvrirPageVote()" disabled style="opacity: 0.5; cursor: not-allowed; margin: 0; font-size: 0.75rem; padding: 8px 12px;">
+		💉 LA PERSONNE DÉSIGNÉE 💉
+		</button>
+
+		<button id="home-to-second-btn" class="btn-standard" onclick="ouvrirSecondePageVote()" 
+          onmouseover="this.style.background='#6a0033'; this.style.boxShadow='0 0 15px #ff3399';" 
+          onmouseout="this.style.background='#4a0022'; this.style.boxShadow='none';"
+          style="background: #4a0022; border-color: #ff3399; display: none; margin: 0; font-size: 0.75rem; padding: 8px 12px; transition: all 0.3s ease;">
+		🩸 LA VICTIME DE LA NUIT 🩸
+		</button>
+	 </div>
+    </div>
+  </div>
+
+  <!-- 1.BIS PAGE MINI JEUX -->
+  <div id="page-mini-jeux" class="page-view" style="display: none;">
+    <div class="container">
+      <h1>🕹️ SCRATCH CAT in Google Doodle 2016 🕹️</h1>
+        <div class="news-card" style="text-align: center; border-color: #00ff66;">
+        <div class="news-title">Joyeux Halloween !</div>
+        <p class="news-body" style="margin-bottom: 15px;">
+		Dans ce mini jeu, vous affronterez 5 niveaux de vagues de fantômes redoutables (dont un boss final).
+        Éliminez les fantômes maléfiques qui ont envahi l'Académie de Magie Scratch en dessinant vos sorts à l'écran ! Pour vaincre un fantôme, dessinez le symbole qui s'affiche au-dessus de lui. Attention à ne pas les laisser s'approcher trop près : vous ne disposez que de 9 vies !
+		Parviendrez-vous à aller jusqu'au bout, à vaincre les fantômes et à sauver l'Académie ?
+		</p>
+        
+        <div style="display: flex; justify-content: center;">
+          <iframe id="scratch-iframe" data-src="https://scratch.mit.edu/projects/567009433/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="btn-standard" onclick="retourAccueil()" style="font-size: 0.85rem; padding: 10px 20px;">
+          ← RETOUR À L'ACCUEIL
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. PAGE INTERMÉDIAIRE DU VOTE (1ère section) -->
+  <div id="page-vote" class="page-view" style="display: none;">
+    <div class="container" style="text-align: center;">
+      <h1 style="color: #33ff99; font-size: 1.8rem;">🗳️ LES VOTES SONT CLÔTS 🗳️</h1>
+      <p style="color: #aaa; max-width: 500px; margin: 25px auto;">
+        Tous les membres du personnel ont votés pour éliminer selon eux la menace potentielle.
+      </p>
+      <button id="launch-screamer-btn" class="btn-vote-anim" onclick="lancerScreamer(event)">
+        CLIQUER ICI POUR DÉCOUVRIR LE VERDICT
+      </button>
+      <div style="margin-top: 30px;">
+        <button class="btn-standard" onclick="retourAccueil()" style="font-size: 0.85rem; padding: 10px 20px;">
+          ← RETOUR À L'ACCUEIL
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.BIS NOUVELLE PAGE INTERMÉDIAIRE (2nde section) -->
+  <div id="page-second-vote" class="page-view" style="display: none;">
+    <div class="container" style="text-align: center;">
+      <h1 style="color: #ff3333; font-size: 1.8rem;">⚡ RAPPORT DE LA NUIT ⚡</h1>
+      <p style="color: #aaa; max-width: 500px; margin: 25px auto;">
+        Des évènements macabre ont eu lieu durant la nuit.
+      </p>
+      <button class="btn-vote-anim" style="border-color: #ff3333; box-shadow: 0 0 15px #ff3333;" onclick="lancerSecondScreamer(event)">
+        CLIQUER ICI POUR DÉCOUVRIR LA VICTIME
+      </button>
+      <div style="margin-top: 30px;">
+        <button class="btn-standard" onclick="retourAccueil()" style="font-size: 0.85rem; padding: 10px 20px;">
+          ← RETOUR À L'ACCUEIL
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. SCREAMER VIDÉO 1 -->
+  <div id="screamer-box">
+    <video id="screamer-video" src="screamer_video.mp4" playsinline></video>
+  </div>
+
+  <!-- 3.BIS SCREAMER VIDÉO 2 -->
+  <div id="second-screamer-box">
+    <video id="second-screamer-video" src="seconde_video_screamer.mp4" playsinline></video>
+  </div>
+
+  <!-- 4. PAGE DE RÉVÉLATION 1 -->
+  <div id="revelation" class="page-view">
+    <div class="container" style="text-align: center;">
+      <h1 id="rev-rapport" style="color: #00ff66;">⚠️ RAPPORT DE DÉCÈS ⚠️</h1>
+      <hr style="border-color: #008b43;">
+      <p style="font-size: 1.1rem; color: #ccc;">VICTIME DU VOTE D'EUTHANASIE PRÉVENTIVE :</p>
+      <h2 id="rev-nom" style="font-size: 2.8rem; color: #fff; margin: 10px 0;">[ NOM ]</h2>
+      <p style="font-size: 1.1rem; color: #ccc;">SON RÔLE SECRET ÉTAIT :</p>
+      <div id="rev-role" class="role-badge">[ RÔLE ]</div>
+      <hr style="border-color: #008b43; margin-top: 25px;">
+      <p style="color: #66ff99; font-size: 0.95rem;">
+        Enquêtez et identifiez toutes les menaces avant qu'elles ne vous dévorent. Le protocole sanitaire d'urgence impose l'ouverture immédiate d'un nouveau vote.
+      </p>
+      <button class="btn-standard" onclick="retourAccueil()" style="margin-top: 15px; font-size: 0.85rem; padding: 10px 20px;">
+        REVENIR À L'ACCUEIL
+      </button>
+    </div>
+  </div>
+
+  <!-- 4.BIS PAGE DE RÉVÉLATION 2 -->
+  <div id="second-revelation" class="page-view">
+    <div class="container" style="text-align: center;">
+      <h1 style="color: #ff3333;">⚠️ RAPPORT DE LA NUIT ⚠️</h1>
+      <hr style="border-color: #ff3333;">
+      <p style="font-size: 1.1rem; color: #ccc;">LES INFECTÉS ONT DÉVORÉS :</p>
+      <h2 style="font-size: 2.8rem; color: #fff; margin: 10px 0;">[ NOM2 ]</h2>
+      <p style="font-size: 1.1rem; color: #ccc;">SON RÔLE SECRET ÉTAIT :</p>
+      <div class="role-badge" style="background: #ff3333; color: #fff;">[ RÔLE2 ]</div>
+      <hr style="border-color: #ff3333; margin-top: 25px;">
+      <button class="btn-standard" onclick="retourAccueil()" style="margin-top: 15px; font-size: 0.85rem; padding: 10px 20px;">
+        REVENIR À L'ACCUEIL
+      </button>
+    </div>
+  </div>
+
+  <!-- MODALES HISTOIRE, RÈGLEMENT & NEWS -->
+  <div id="modal-histoire" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('modal-histoire')">✕</span>
+      <h2 style="color: #00ff66; margin-top: 0;">📖 HISTOIRE & CONTEXTE</h2>
+      <hr style="border-color: #008b43;">
+      <p><strong>C.N.D.A. - Cabinet de Neutralisation et Décontamination des Afflictions</strong></p>
+      <p>Le C.N.D.A. est une structure de haute sécurité sanitaire spécialisée dans le confinement, l'étude et l'éradication des épidémies d'origine inconnue et des anomalies biologiques. Suite à une brèche de sécurité majeure dans le secteur de quarantaine, l'établissement est placé sous protocole d'urgence absolu. Les membres du personnel et les résidents doivent identifier les menaces infiltrées tout en maintenant les activités du cabinet.</p>
+    </div>
+  </div>
+
+  <div id="modal-regles" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-regles')">✕</span>
+  <h2 style="color: #00ff66; margin-top: 0;">📜 RÈGLES DU JEU</h2>
+  <hr style="border-color: #008b43;">
+  <p>La nuit....<br>
+  Les infectés doivent éliminer le personnel du CNDA et ne pas se faire démasquer.<br>
+  Le jour....<br>
+  Le personnel du CNDA doivent désigner les collègues potentiellement infectés à euthanasier.</p>
+  </div></div>
+  
+  <div id="modal-news" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-news')">✕</span><div class="news-tag" id="modal-news-tag">BULLETIN MATINAL</div><h2 id="modal-news-titre" style="color: #00ff66; margin-top: 5px;">[ TITRE ]</h2><hr style="border-color: #008b43;"><p id="modal-news-contenu" style="color: #ddd; line-height: 1.5;">[ TEXTE ]</p></div></div>
+
+  <!-- MODALES DES FICHES DE RÔLES INDIVIDUELLES -->
+  <div id="modal-fiche-01" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-01')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧑‍⚕️ LES SCIENTIFIQUES</h2><hr style="border-color: #008b43;"><p><strong>Votre fonction :</strong> Soignant, scientifique ou employé du cabinet. Sain d'esprit.</p></div></div>
+  <div id="modal-fiche-02" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-02')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧑‍⚕️ LE DIRECTEUR DU CNDA</h2><hr style="border-color: #008b43;"><p><strong>🪪 Statut :</strong> Identité publique.</p></div></div>
+  <div id="modal-fiche-03" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-03')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧑‍⚕️ FICHE 03 — INFIRMIER JUMEAU</h2><hr style="border-color: #008b43;"><p><strong>🤝 Lien de Confiance :</strong> Connaît dès le début l'identité de son jumeau soignant et son innocence.</p></div></div>
+  <div id="modal-fiche-04" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-04')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🩻 FICHE 04 — RADIOLOGUE</h2><hr style="border-color: #008b43;"><p><strong>🩻 IRM Nocturne :</strong> Passe une IRM par nuit à un joueur pour découvrir son rôle exact.</p></div></div>
+  <div id="modal-fiche-05" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-05')">✕</span><h2 style="color: #00ff66; margin-top: 0;">💊 FICHE 05 — PHARMACIEN</h2><hr style="border-color: #008b43;"><p><strong>💉 Vaccin Préventif :</strong> Immunise un joueur des attaques pour 1 nuit (usage unique).</p></div></div>
+  <div id="modal-fiche-06" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-06')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🔒 FICHE 06 — RESPONSABLE QUARANTAINE</h2><hr style="border-color: #008b43;"><p><strong>🔒 Mise en confinement :</strong> Protège un joueur de toute mort nocturne.</p></div></div>
+  <div id="modal-fiche-07" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-07')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🗡️ FICHE 07 — CHIRURGIEN VÉTÉRAN</h2><hr style="border-color: #008b43;"><p><strong>☠️ Dernier Souffle :</strong> S'il est éliminé, emporte immédiatement un autre joueur avec lui.</p></div></div>
+  <div id="modal-fiche-08" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-08')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🌙 FICHE 08 — INFIRMIER DE GARDE</h2><hr style="border-color: #008b43;"><p><strong>👁️ Observation Nocturne :</strong> Reçoit chaque matin un indice sur les événements nocturnes.</p></div></div>
+  <div id="modal-fiche-09" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-09')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧬 FICHE 09 — VIROLOGISTE</h2><hr style="border-color: #008b43;"><p><strong>☣️ Sang Toxique :</strong> Immunisé contre les attaques des Infectés.</p></div></div>
+  <div id="modal-fiche-10" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-10')">✕</span><h2 style="color: #00ff66; margin-top: 0;">☣️ FICHE 10 — INFECTÉ</h2><hr style="border-color: #008b43;"><p><strong>🩸 Attaque Cannibale :</strong> Vote chaque nuit pour dévorer une victime.</p></div></div>
+  <div id="modal-fiche-11" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-11')">✕</span><h2 style="color: #00ff66; margin-top: 0;">☣️ FICHE 11 — PATIENT ZÉRO</h2><hr style="border-color: #008b43;"><p><strong>🧬 Inoculation Virale :</strong> Convertit la cible en Infecté.</p></div></div>
+  <div id="modal-fiche-12" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-12')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧛 FICHE 12 — VAMPIRE</h2><hr style="border-color: #008b43;"><p><strong>🩸 Morsure :</strong> Convertit les joueurs.</p></div></div>
+  <div id="modal-fiche-13" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-13')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧛 FICHE 13 — LE COMTE ALUCARD</h2><hr style="border-color: #008b43;"><p><strong>⚡ Morsure Foudroyante :</strong> Convertit en une nuit.</p></div></div>
+  <div id="modal-fiche-14" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-14')">✕</span><h2 style="color: #00ff66; margin-top: 0;">👻 FICHE 14 — FANTÔME INFILTRÉ</h2><hr style="border-color: #008b43;"><p><strong>🎯 Objectif :</strong> Récolter 9 âmes.</p></div></div>
+
+  <script>
+    const baseDeDonnees = {
+      1:  { newsTitre: "Rapport Nuit #01", voteJoueur: "Julie BARTHELEMY", role: "Pharmacienne", victime: "Ali LARGO", voteFerme: false },
+      2:  { newsTitre: "Rapport Nuit #02", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      3:  { newsTitre: "Rapport Nuit #03", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      4:  { newsTitre: "Rapport Nuit #04", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      5:  { newsTitre: "Rapport Nuit #05", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      6:  { newsTitre: "Rapport Nuit #06", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      7:  { newsTitre: "Rapport Nuit #07", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      8:  { newsTitre: "Rapport Nuit #08", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      9:  { newsTitre: "Rapport Nuit #09", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      10: { newsTitre: "Rapport Nuit #10", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      11: { newsTitre: "Rapport Nuit #11", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      12: { newsTitre: "Rapport Nuit #12", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      13: { newsTitre: "Rapport Nuit #13", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      14: { newsTitre: "Rapport Nuit #14", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      15: { newsTitre: "Rapport Nuit #15", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      16: { newsTitre: "Rapport Nuit #16", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      17: { newsTitre: "Rapport Nuit #17", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      18: { newsTitre: "Rapport Nuit #18", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      19: { newsTitre: "Rapport Nuit #19", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      20: { newsTitre: "Rapport Nuit #20", voteJoueur: "", role: "", victime: "", voteFerme: false },
+      21: { newsTitre: "Rapport Nuit #21", voteJoueur: "", role: "", victime: "", voteFerme: false }
+    };
+
+    const listeInitialeJoueurs = [
+      "Adrien CERBELAUD", "Alexandre CAMARATA", "Ali LARGO", "Amlan Eva GBANDAMA", 
+      "Axelle PALERMO", "Benjamin COELHO", "Barbara LUGANO", "Bruno DUMAS", 
+      "David FLECHE", "Élodie ALIBERT", "Émilie ROUSSEAU", "Florentin VALADE", 
+      "Gaétan LOPEZ", "Gwendoline NARDO", "Hadrien HURET", "Irvin STRASSER", 
+      "Isabelle VEILLARD", "Julie BARTHELEMY", "Joahna GIOJA", "Kevin TERSIGNI", 
+      "Laura JOSEPH", "Laurence FLECHE", "Laurent BELOT", "Leana MAC DONALD", 
+      "Lilian LAYRAC", "Madeline SERRAT", "Magalie MAKOWSKI", "Marvin TRICHÉ", 
+      "Matthieu LEMOINE", "Mathieu MARTINEZ", "Nicolas ANDRÉ", "Philippe ANDOLINA", 
+      "Pierre-Alain SABATIER", "Richard COMANDINI", "Romane CUADROS", "Sabrina BRAIDA", 
+      "Samuel CUDENNEC", "Sauveur MONTEMAGGI", "Sébastien NICOLAS", "Tessa VERNIER", 
+      "Thierry CHARBONNIER", "Yohan BELIN", "Yvan SANCHEZ VALLINAS"
+    ];
+
+    let jourActuel = 1;
+
+    function toggleBurgerMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    function initialiserPage() {
+      localStorage.removeItem('cnda_elimines');
+
+      const params = new URLSearchParams(window.location.search);
+      const jourParam = parseInt(params.get('jour'));
+
+      if (jourParam && baseDeDonnees[jourParam] && baseDeDonnees[jourParam].voteJoueur.trim() !== "") {
+        jourActuel = jourParam;
+      } else {
+        for (let j = 1; j <= 21; j++) {
+          if (baseDeDonnees[j].voteJoueur.trim() !== "") {
+            jourActuel = j;
+          }
+        }
+      }
+
+      const donnees = baseDeDonnees[jourActuel];
+
+      document.getElementById('rev-rapport').innerText = `⚠️ RAPPORT DE DÉCÈS #${jourActuel < 10 ? '0' + jourActuel : jourActuel}`;
+      document.getElementById('rev-nom').innerText = donnees.voteJoueur;
+      document.getElementById('rev-role').innerText = donnees.role;
+
+      verifierActivationBoutonResultat(donnees.voteJoueur);
+
+      const btnSecondEvent = document.getElementById('home-to-second-btn');
+      if (btnSecondEvent) {
+        if (donnees.victime && donnees.victime.trim() !== "") {
+          btnSecondEvent.style.display = "inline-block";
+        } else {
+          btnSecondEvent.style.display = "none";
+        }
+      }
+
+      if (donnees.voteFerme === true) {
+        bloquerInterfaceVote();
+      }
+
+      remplirListesMenu();
+      mettreAJourListesVotantEtCible();
+      jouerAccueilSound();
+    }
+
+    function verifierActivationBoutonResultat(nomVoteJoueur) {
+      const btnVote = document.getElementById('home-to-vote-btn');
+      if (btnVote) {
+        if (nomVoteJoueur && nomVoteJoueur.trim() !== "") {
+          btnVote.disabled = false;
+          btnVote.style.opacity = "1";
+          btnVote.style.cursor = "pointer";
+        } else {
+          btnVote.disabled = true;
+          btnVote.style.opacity = "0.5";
+          btnVote.style.cursor = "not-allowed";
+        }
+      }
+    }
+
+    function bloquerInterfaceVote() {
+      const btnValider = document.getElementById('btn-valider-vote');
+      if (btnValider) {
+        btnValider.disabled = true;
+        btnValider.style.opacity = "0.5";
+        btnValider.style.cursor = "not-allowed";
+        btnValider.innerText = "SCRUTIN CLÔT";
+      }
+      const sVotant = document.getElementById('select-votant');
+      const sCible = document.getElementById('select-cible');
+      if(sVotant) sVotant.disabled = true;
+      if(sCible) sCible.disabled = true;
+    }
+
+    function jouerAccueilSound() {
+      const accueilSound = document.getElementById('accueil-sound');
+      accueilSound.volume = 0.4;
+      accueilSound.play().catch(() => {
+        const unblockAudio = () => {
+          if (document.getElementById('accueil').style.display !== 'none') {
+            accueilSound.play();
+          }
+          window.removeEventListener('click', unblockAudio);
+        };
+        window.addEventListener('click', unblockAudio);
+      });
+    }
+
+    function couperSons() {
+      const accueilSound = document.getElementById('accueil-sound');
+      const music = document.getElementById('music-revelation');
+      const revealSound = document.getElementById('reveal-sound');
+      const heartbeatSound = document.getElementById('heartbeat-sound');
+      const screamerVideo = document.getElementById('screamer-video');
+
+      accueilSound.pause(); accueilSound.currentTime = 0;
+      music.pause(); music.currentTime = 0;
+      revealSound.pause(); revealSound.currentTime = 0;
+      heartbeatSound.pause(); heartbeatSound.currentTime = 0;
+      screamerVideo.pause(); screamerVideo.currentTime = 0;
+    }
+
+    function couperTousLesSons() {
+      couperSons();
+      
+      const sHeart = document.getElementById('second-heartbeat-sound');
+      const sReveal = document.getElementById('second-reveal-sound');
+      const sMusic = document.getElementById('music-second-revelation');
+      const sVideo = document.getElementById('second-screamer-video');
+
+      if(sHeart) { sHeart.pause(); sHeart.currentTime = 0; }
+      if(sReveal) { sReveal.pause(); sReveal.currentTime = 0; }
+      if(sMusic) { sMusic.pause(); sMusic.currentTime = 0; }
+      if(sVideo) { sVideo.pause(); sVideo.currentTime = 0; }
+    }
+
+    function ouvrirPageVote() {
+      const donnees = baseDeDonnees[jourActuel];
+      if (!donnees.voteJoueur || donnees.voteJoueur.trim() === "") {
+        return; 
+      }
+
+      couperTousLesSons();
+
+      const iframe = document.getElementById('scratch-iframe');
+      if (iframe) iframe.src = "";
+
+      document.getElementById('accueil').style.display = 'none';
+      document.getElementById('page-mini-jeux').style.display = 'none';
+      document.getElementById('page-second-vote').style.display = 'none';
+      document.getElementById('page-vote').style.display = 'flex';
+
+      const heartbeatSound = document.getElementById('heartbeat-sound');
+      heartbeatSound.volume = 0.5;
+      heartbeatSound.play().catch(e => console.log("Audio d'ambiance bloqué :", e));
+    }
+
+    function ouvrirSecondePageVote() {
+      couperTousLesSons();
+
+      const iframe = document.getElementById('scratch-iframe');
+      if (iframe) iframe.src = "";
+
+      document.getElementById('accueil').style.display = 'none';
+      document.getElementById('page-vote').style.display = 'none';
+      document.getElementById('page-mini-jeux').style.display = 'none';
+      document.getElementById('revelation').style.display = 'none';
+      document.getElementById('second-revelation').style.display = 'none';
+      
+      document.getElementById('page-second-vote').style.display = 'flex';
+
+      const secondHeartbeat = document.getElementById('second-heartbeat-sound');
+      if(secondHeartbeat) {
+        secondHeartbeat.volume = 0.5;
+        secondHeartbeat.play().catch(e => console.log("Audio secondaire bloqué :", e));
+      }
+    }
+
+    function basculerPageMiniJeux() {
+      couperTousLesSons();
+      document.getElementById('accueil').style.display = 'none';
+      document.getElementById('page-vote').style.display = 'none';
+      document.getElementById('page-second-vote').style.display = 'none';
+      
+      const iframe = document.getElementById('scratch-iframe');
+      if (iframe) {
+        iframe.src = iframe.getAttribute('data-src');
+      }
+
+      document.getElementById('page-mini-jeux').style.display = 'flex';
+      jouerAccueilSound();
+    }
+
+    function retourAccueil() {
+      couperTousLesSons();
+      
+      const iframe = document.getElementById('scratch-iframe');
+      if (iframe) iframe.src = "";
+
+      document.getElementById('revelation').style.display = 'none';
+      document.getElementById('second-revelation').style.display = 'none';
+      document.getElementById('page-vote').style.display = 'none';
+      document.getElementById('page-second-vote').style.display = 'none';
+      document.getElementById('page-mini-jeux').style.display = 'none';
+      document.getElementById('accueil').style.display = 'flex';
+      jouerAccueilSound();
+    }
+
+    function remplirListesMenu() {
+      const voteDropdown = document.getElementById('vote-dropdown');
+      const newsDropdown = document.getElementById('news-dropdown');
+      
+      voteDropdown.innerHTML = '<option value="">📅 Votes</option>';
+      newsDropdown.innerHTML = '<option value="">📰 Bulletins</option>';
+
+      for (let j = 1; j <= 21; j++) {
+        const donneesJour = baseDeDonnees[j];
+        
+        const aUnVote = donneesJour && donneesJour.voteJoueur && donneesJour.voteJoueur.trim() !== "";
+        const aUnJournal = donneesJour && donneesJour.victime && donneesJour.victime.trim() !== "";
+
+        if (aUnVote) {
+          const optVote = document.createElement('option');
+          optVote.value = j;
+          if (j === jourActuel) optVote.selected = true;
+          optVote.text = donneesJour.voteFerme ? `🔒 Vote Jour ${j} — ${donneesJour.voteJoueur}` : `Vote Jour ${j} — ${donneesJour.voteJoueur}`;
+          voteDropdown.appendChild(optVote);
+        }
+
+        if (aUnJournal) {
+          const optNews = document.createElement('option');
+          optNews.value = j;
+          optNews.text = `Journal #${j}`;
+          newsDropdown.appendChild(optNews);
+        }
+      }
+    }
+
+    function changerJournees(nouveauJour) {
+      if (nouveauJour) window.location.search = `?jour=${nouveauJour}`;
+    }
+
+    function afficherNewsModal(jourNews) {
+      if (!jourNews) return;
+      const news = baseDeDonnees[jourNews];
+      document.getElementById('modal-news-tag').innerText = `BULLETIN MATINAL — JOUR ${jourNews}`;
+      document.getElementById('modal-news-titre').innerText = news.newsTitre;
+      document.getElementById('modal-news-contenu').innerText = news.victime;
+      openModal('modal-news');
+    }
+
+    function ouvrirFicheRole(selectElement) {
+      const modalId = selectElement.value;
+      if (modalId) {
+        openModal(modalId);
+        selectElement.value = ""; 
+      }
+    }
+
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    function mettreAJourListesVotantEtCible() {
+      const selectVotant = document.getElementById('select-votant');
+      const selectCible = document.getElementById('select-cible');
+      
+      if (!selectVotant || !selectCible) return;
+
+      const valeurVotantActuelle = selectVotant.value;
+      const valeurCibleActuelle = selectCible.value;
+
+      selectVotant.innerHTML = '<option value="">🧑‍⚕️ Sélectionner votre nom d\'agent...</option>';
+      selectCible.innerHTML = '<option value="">💉 Désigner la cible à euthanasier d\'urgence...</option>';
+      
+      const elimines = JSON.parse(localStorage.getItem('cnda_elimines') || "[]");
+      const joueursVivants = listeInitialeJoueurs.filter(j => !elimines.includes(j));
+      
+      joueursVivants.forEach(joueur => {
+        const optVotant = document.createElement('option');
+        optVotant.value = joueur;
+        optVotant.textContent = joueur;
+        if (joueur === valeurVotantActuelle) optVotant.selected = true;
+        selectVotant.appendChild(optVotant);
+
+        const optCible = document.createElement('option');
+        optCible.value = joueur;
+        optCible.textContent = joueur;
+        if (joueur === valeurCibleActuelle) optCible.selected = true;
+        selectCible.appendChild(optCible);
+      });
+    }
+
+    function enregistrerVoteLocal() {
+      const donnees = baseDeDonnees[jourActuel];
+
+      if (donnees.voteFerme === true) {
+        alert("Scrutin clôturé : les votes sont verrouillés manuellement.");
+        bloquerInterfaceVote();
+        return;
+      }
+
+      const votant = document.getElementById('select-votant').value;
+      const cible = document.getElementById('select-cible').value;
+
+      if (votant === "" || cible === "") {
+        alert("Veuillez sélectionner votre nom d'agent et une cible.");
+        return;
+      }
+
+      let urnes = JSON.parse(localStorage.getItem('cnda_votes_jour') || "{}");
+      urnes[votant] = cible;
+      localStorage.setItem('cnda_votes_jour', JSON.stringify(urnes));
+
+      document.getElementById('confirmation-vote').style.display = 'block';
+      document.getElementById('select-cible').value = "";
+    }
+
+    function marquerCommeElimine(nomJoueur) {
+      let elimines = JSON.parse(localStorage.getItem('cnda_elimines') || "[]");
+      if (!elimines.includes(nomJoueur)) {
+        elimines.push(nomJoueur);
+        localStorage.setItem('cnda_elimines', JSON.stringify(elimines));
+      }
+      mettreAJourListesVotantEtCible();
+    }
+
+    function afficherRecapVotes() {
+      const codeSecret = "1234"; 
+      const saisie = prompt("Entrez le code secret du C.N.D.A. pour afficher les votes :");
+      
+      if (saisie === null) return;
+
+      if (saisie !== codeSecret) {
+        alert("Accès refusé : Code secret erroné.");
+        return;
+      }
+
+      const containerVotes = document.getElementById('liste-recap-votes');
+      let urnes = JSON.parse(localStorage.getItem('cnda_votes_jour') || "{}");
+      
+      let html = "<strong>REGISTRE DES VOTANTS (Jour " + jourActuel + ") :</strong><br>";
+      const votants = Object.keys(urnes);
+      
+      if (votants.length === 0) {
+        html += "<span style='color: #33ff99;'>Aucun vote enregistré pour l'instant.</span>";
+      } else {
+        html += "<ul style='margin: 5px 0 10px 20px; padding: 0;'>";
+        for (let votant of votants) {
+          html += `<li>Agent <strong>${votant}</strong> a voté pour : <span style='color: #88ffbb;'>${urnes[votant]}</span></li>`;
+        }
+        html += "</ul>";
+        html += `<button onclick="telechargerExcelGlobal()" class="btn-standard" style="padding: 5px 10px; font-size: 0.75rem; background: #004a22; margin-top: 5px;">📥 Télécharger le classeur Excel</button>`;
+      }
+      
+      containerVotes.innerHTML = html;
+      containerVotes.style.display = containerVotes.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function telechargerExcelGlobal() {
+      let urnes = JSON.parse(localStorage.getItem('cnda_votes_jour') || "{}");
+      let wb = XLSX.utils.book_new();
+      
+      let wsData = [["Agent Votant", "Cible Désignée"]];
+      for (let votant in urnes) {
+        wsData.push([votant, urnes[votant]]);
+      }
+      
+      let ws = XLSX.utils.aoa_to_sheet(wsData);
+      XLSX.utils.book_append_sheet(wb, ws, "Jour " + jourActuel);
+      
+      XLSX.writeFile(wb, "Votes_CNDA_Jour_" + jourActuel + ".xlsx");
+    }
+
+    window.addEventListener('DOMContentLoaded', initialiserPage);
+
+    function lancerScreamer(event) {
+      event.stopPropagation();
+      document.getElementById('heartbeat-sound').pause();
+
+      const musicRevelation = document.getElementById('music-revelation');
+      const revealSound = document.getElementById('reveal-sound');
+      const screamerBox = document.getElementById('screamer-box');
+      const screamerVideo = document.getElementById('screamer-video');
+
+      document.getElementById('page-vote').style.display = 'none';
+      screamerBox.style.display = 'block';
+
+      screamerVideo.currentTime = 0;
+      screamerVideo.muted = false;
+      screamerVideo.volume = 1.0;
+      screamerVideo.play().catch(e => console.log("Vidéo bloquée :", e));
+      
+      screamerVideo.onended = finaliserScreamer;
+      setTimeout(finaliserScreamer, 5500);
+
+      function finaliserScreamer() {
+        if (screamerBox.style.display !== 'none') {
+          screamerVideo.pause();
+          screamerBox.style.display = 'none';
+          document.getElementById('revelation').style.display = 'flex';
+          
+          revealSound.volume = 1.0;
+          revealSound.play().catch(e => console.log("Audio de révélation bloqué :", e));
+
+          setTimeout(() => {
+            musicRevelation.volume = 0.4;
+            musicRevelation.play().catch(e => console.log("Musique de révélation bloquée :", e));
+          }, 600);
+        }
+      }
+    }
+
+    function lancerSecondScreamer(event) {
+      event.stopPropagation();
+      const sHeart = document.getElementById('second-heartbeat-sound');
+      if(sHeart) sHeart.pause();
+
+      const secondMusic = document.getElementById('music-second-revelation');
+      const secondRevealSound = document.getElementById('second-reveal-sound');
+      const secondScreamerBox = document.getElementById('second-screamer-box');
+      const secondScreamerVideo = document.getElementById('second-screamer-video');
+
+      document.getElementById('page-second-vote').style.display = 'none';
+      secondScreamerBox.style.display = 'block';
+
+      if(secondScreamerVideo) {
+        secondScreamerVideo.currentTime = 0;
+        secondScreamerVideo.muted = false;
+        secondScreamerVideo.volume = 1.0;
+        secondScreamerVideo.play().catch(e => console.log("Seconde vidéo bloquée :", e));
+        
+        secondScreamerVideo.onended = finaliserSecondScreamer;
+        setTimeout(finaliserSecondScreamer, 5500);
+      }
+
+      function finaliserSecondScreamer() {
+        if (secondScreamerBox.style.display !== 'none') {
+          if(secondScreamerVideo) secondScreamerVideo.pause();
+          secondScreamerBox.style.display = 'none';
+          document.getElementById('second-revelation').style.display = 'flex';
+          
+          if(secondRevealSound) {
+            secondRevealSound.volume = 1.0;
+            secondRevealSound.play().catch(e => console.log("Audio secondaire bloqué :", e));
+          }
+
+          setTimeout(() => {
+            if(secondMusic) {
+              secondMusic.volume = 0.4;
+              secondMusic.play().catch(e => console.log("Musique secondaire bloquée :", e));
+            }
+          }, 600);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
