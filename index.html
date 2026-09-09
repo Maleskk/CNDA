@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halloween 2026 - Alerte Biologique au CNDA</title>
-  <!-- Inclusion de la bibliothèque SheetJS (XLSX) pour l'export Excel -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <style>
     body { 
       background-color: #030805; 
@@ -135,7 +133,7 @@
         width: 100%;
       }
       .page-view {
-        padding-top: 130px !important; /* Ajustement dynamique si le menu s'ouvre */
+        padding-top: 100px !important; /* Ajustement dynamique si le menu s'ouvre */
       }
     }
     
@@ -146,13 +144,13 @@
       justify-content: center; 
       align-items: center; 
       min-height: 100vh; 
-      padding: 90px 20px 40px 20px; 
+      padding: 75px 20px 80px 20px; 
       box-sizing: border-box; 
     }
 
     .container { 
       border: 2px solid #008b43; 
-      padding: 30px; 
+	  padding: 10px; 
       max-width: 950px; 
       width: 100%; 
       background: rgba(0, 17, 8, 0.9); 
@@ -168,16 +166,16 @@
       letter-spacing: 2px; 
       text-align: center; 
       border-bottom: 1px solid #008b43;
-      padding-bottom: 15px;
+	  padding-bottom: 5px;
     }
 
     .contexte-box {
       color: #ccc;
       font-size: 0.95rem;
       line-height: 1.5;
-      margin-bottom: 25px;
+      margin-bottom: 5px;
       background: rgba(0, 0, 0, 0.5);
-      padding: 15px;
+      padding: 5px;
       border-left: 3px solid #00ff66;
     }
 
@@ -185,7 +183,7 @@
       background: rgba(0, 30, 15, 0.6);
       border: 1px solid #00ff66;
       padding: 20px;
-      margin-bottom: 30px;
+      margin-bottom: 3px;
       box-shadow: inset 0 0 10px #008b43;
     }
     .news-tag { color: #33ff99; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 5px; }
@@ -243,15 +241,17 @@
 
   <!-- BANDEAU HAUT PERMANENT -->
   <header id="top-bar">
+ 
+  
   <div style="background:#030805 ; padding: 0px; display: inline-block; border: 2px solid #008b43; box-shadow: 0 0 20px #008b43;">
   <svg width="280" height="90" viewBox="0 0 480 150" style="font-family: 'Calibri', Arial, sans-serif;">
    
    <!-- Logo Cercles -->
     <g transform="translate(15, 0)">
-    <!-- Cercles qui entourent -->  
+    <!-- Cercles qui entour -->  
       <circle cx="75" cy="75" r="50" fill="none" stroke="#00ff66" stroke-width="5" opacity="0.8"/>
     <!-- Cercles entrelacés -->  
-      <circle cx="75" cy="60" r="25" fill="none" stroke="#ff9900" stroke-width="2.5"/>
+      <circle cx="75" cy="60" r="25" fill="none" stroke="#ff9900"" stroke-width="2.5"/>
       <circle cx="65" cy="82" r="25" fill="none" stroke="#ff9900" stroke-width="2.5"/>
       <circle cx="85" cy="82" r="25" fill="none" stroke="#ff9900" stroke-width="2.5"/>
     </g>
@@ -260,10 +260,18 @@
     <line x1="160" y1="20" x2="160" y2="130" stroke="#00ff66" stroke-width="2" />
 
     <!-- Sigle vertical CNDA en orange -->
-    <text x="180" y="45" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">C</tspan><tspan fill="#ffffff">abinet de</tspan></text>
-    <text x="180" y="70" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">N</tspan><tspan fill="#ffffff">eutralisation et</tspan></text>
-    <text x="180" y="95" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">D</tspan><tspan fill="#ffffff">écontamination des</tspan></text>
-    <text x="180" y="120" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">A</tspan><tspan fill="#ffffff">fflictions</tspan></text>
+    <text x="180" y="45" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">C</tspan><tspan fill="#ffffff">abinet de</tspan></tspan></text>
+    <text x="180" y="70" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">N</tspan><tspan fill="#ffffff">eutralisation et</tspan></tspan></text>
+    <text x="180" y="95" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">D</tspan><tspan fill="#ffffff">écontamination des</tspan></tspan></text>
+    <text x="180" y="120" font-size="20" letter-spacing="4"><tspan fill="#ff9900" font-weight="bold">A</tspan><tspan fill="#ffffff">fflictions</tspan></tspan></text>
+
+    <!-- Texte avec les premières lettres en orange -->
+    <text x="180" y="45" font-size="20" font-weight="bold">
+      <tspan x="230" dy="0">
+      <tspan x="230" dy="25">
+      <tspan x="230" dy="70">
+      <tspan x="230" dy="95">
+    </text>
     </svg>
     </div>
 
@@ -318,6 +326,7 @@
 
         <button class="btn-nav" onclick="basculerPageMiniJeux()">🕹️ MINI JEUX</button>
       </div>
+    </div>
   </header>
 
   <!-- AUDIOS PREMIÈRE SECTION -->
@@ -334,24 +343,29 @@
   <!-- 1. PAGE D'ACCUEIL -->
   <div id="accueil" class="page-view">
     <div class="container">
-      <h1>🎃 HALLOWEEN 2026 🎃</h1>
+      <h1><p style="font-size: 20px;">🎃 HALLOWEEN 2026 🎃</p>
+	  </h1>
       <div class="contexte-box">
         <strong>👔 Directeur du CNDA : <span style="color: #00ffff;">David FLECHE</span></strong><br>
         <ul>
           <li><strong><span style="color: #ffd700;">Voix Prépondérante</span></strong> : Son vote compte double</li>
           <li><strong><span style="color: #ffd700;">Droit de Tranchage</span></strong> : En cas d'égalité, il tranche.</li>
-          <li><strong><span style="color: #ffd700;">Badge Haute Sécurité</span></strong> : À sa mort, il désigne un joueur qui hérite de ses pouvoirs.</li>
-        </ul>  
+          <li><strong><span style="color: #ffd700;">Badge Haute Sécurité</span></strong> : À sa mort, il désigne un joueur qui hérite de ses pouvoirs.
+		</ul>  
+		  </li>
+        
       </div>
 
         <!-- SECTION URNE DE VOTE INTERACTIVE -->
         <div class="news-card" style="border-color: #00ff66;">
-          <div class="news-tag" style="text-align: center; margin-bottom: 5px;">
-            🗳️ URNE DES VOTES 🗳️
-          </div>
-          <div class="news-title" style="text-align: center;">
-            Le scrutin est ouvert
-          </div>
+  <!-- Ajout de text-align: center; et d'un peu de marge pour l'esthétique -->
+  <div class="news-tag" style="text-align: center; margin-bottom: 5px;">
+    🗳️ URNE DES VOTES 🗳️
+  </div>
+  <!-- Ajout de text-align: center; -->
+  <div class="news-title" style="text-align: center;">
+    Le scrutin est ouvert
+  </div>
           
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -365,8 +379,8 @@
             </div>
             
             <button id="btn-valider-vote" class="btn-standard" onclick="enregistrerVoteLocal()" style="background: #b35900; border-color: #ff9900; padding: 5px; font-size: 0.9rem;">
-			      VALIDER VOTRE CHOIX
-			      </button>
+			VALIDER VOTRE CHOIX
+			</button>
           </div>
           
           <div id="confirmation-vote" style="color: #00ff66; font-size: 0.85rem; margin-top: 10px; display: none;">
@@ -375,7 +389,7 @@
 
           <div style="margin-top: 20px; border-top: 1px dashed #008b43; padding-top: 15px;">
             <button class="btn-standard" onclick="afficherRecapVotes()" style="padding: 8px 15px; font-size: 0.8rem; background: #002211;">
-              🔒
+              🔒 
             </button>
             <div id="liste-recap-votes" style="color: #ccc; font-size: 0.85rem; margin-top: 10px; text-align: left; display: none; background: #000a05; padding: 10px; border: 1px solid #004a22;">
             </div>
@@ -383,16 +397,20 @@
         </div>
 
       <div style="margin-top: 20px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; width: 100%;">
+  
+        <!-- Bouton 1 réduit -->
 		<button id="home-to-vote-btn" class="btn-standard" onclick="ouvrirPageVote()" disabled style="opacity: 0.5; cursor: not-allowed; margin: 0; font-size: 0.75rem; padding: 8px 12px;">
 		💉 LA PERSONNE DÉSIGNÉE 💉
 		</button>
 
+		<!-- Bouton 2 réduit avec effet de surbrillance corrigé -->
 		<button id="home-to-second-btn" class="btn-standard" onclick="ouvrirSecondePageVote()" 
           onmouseover="this.style.background='#6a0033'; this.style.boxShadow='0 0 15px #ff3399';" 
           onmouseout="this.style.background='#4a0022'; this.style.boxShadow='none';"
           style="background: #4a0022; border-color: #ff3399; display: none; margin: 0; font-size: 0.75rem; padding: 8px 12px; transition: all 0.3s ease;">
 		🩸 LA VICTIME DE LA NUIT 🩸
 		</button>
+
 	 </div>
     </div>
   </div>
@@ -511,6 +529,21 @@
       <hr style="border-color: #008b43;">
       <p><strong>C.N.D.A. - Cabinet de Neutralisation et Décontamination des Afflictions</strong></p>
       <p>Le C.N.D.A. est une structure de haute sécurité sanitaire spécialisée dans le confinement, l'étude et l'éradication des épidémies d'origine inconnue et des anomalies biologiques. Suite à une brèche de sécurité majeure dans le secteur de quarantaine, l'établissement est placé sous protocole d'urgence absolu. Les membres du personnel et les résidents doivent identifier les menaces infiltrées tout en maintenant les activités du cabinet.</p>
+      
+      <h3>Organigramme des Services :</h3>
+      <ul>
+        <li>Filière de Stérilisation Virale (FSV)</li>
+        <li>Filière d’Euthanasie (FE)</li>
+        <li>Division des Mutations Parasitaires (DMP)</li>
+        <li>Traçabilité des Lésions et Souches Infectées (TLSI)</li>
+        <li>Gestion du Risque de Contamination (GRC)</li>
+        <li>Division de l'Évaluation Virale (DEV)</li>
+      </ul>
+
+      <h3>Menaces :</h3>
+      <p>Suite à un accident dans un des laboratoires, plusieurs agents ont été contaminés par un virus neurologique qui provoque chez eux des crises d'hyperphagie agressive (compulsion cannibale), les poussant à dévorer leurs collègues, ils opérent de nuit.</p>
+      
+      
     </div>
   </div>
 
@@ -521,25 +554,48 @@
   Les infectés doivent éliminer le personnel du CNDA et ne pas se faire démasquer.<br>
   Le jour....<br>
   Le personnel du CNDA doivent désigner les collègues potentiellement infectés à euthanasier.</p>
+  <p>Chaque joueur reçoit un rôle, (avec une fonction ou une particularité bien précise) tandis que le ou les infectés sont désignés en secret.</p>
+
+  <p>À chaque tour de jeu, le meneur de jeu annonce que la nuit tombe. Alors, tous les joueurs ferment les yeux et ne pourront les ouvrir que lorsqu'ils seront appelés ou lorsque viendra l'aube. 
+     Puis, le meneur appelle les différents personnages un à un pour qu'ils utilisent leurs pouvoirs ou effectuent leurs actions. 
+	 Les loups-garous peuvent dévorer des villageois, la petite fille peut les espionner, la sorcière prépare des philtres magiques et la voyante peut même percer à jour la véritable identité d'un joueur.</p>
+
+  <p>Lorsque tous ont agit, le meneur annonce que le jour se lève. On résout alors les différents événements de la nuit. 
+     Les loups-garous ont peut-être dévoré des villageois, le chasseur aura assurément tué l'un d'eux voire un innocent, le voleur aura certainement ourdi quelque manigance, et Cupidon aura sûrement choisi des cibles pour ses traits. 
+     Attention tous les matins les villageois votent pour éliminer l'un d'eux qu'ils pensent être un loup-garou.</p>
+
+  <p>Les villageois gagnent s'ils ont éliminé tous les loups-garous, les loups-garous, s'ils ont dévoré tous les villageois.<br>
+  <br>
+  Suivant le nombre de joueurs d'autres menaces peuvent venir s'ajouter à la partie.</p>
+  
+  <h3>Règles de conduite :</h3>
+      <ul>
+        <li>1. Rôles Secrets : Tout repose sur le bluff et la confidentialilté des rôles, mais vous êtes libre de les dévoiler.</li>
+        <li>2. Canaux Officiels : Les débats publics auront lieu uniquement sur Zoom dans le salon #cnda-salle-de-pause.</li>
+        <li>3. Canaux Secrets : ne sont accessibles qu'aux rôles autorisés.</li>
+        <li>4. Respect & Courtoisie : Malgré la tension et le registre horrifique, la courtoisie professionnelle reste de mise. On attaque les arguments et les suspects, pas les personnes !</li>
+        <li>5. Élimination : Un joueur éliminé (dévoré ou confiné) devient un Sujet Neutralisé. Il ne doit plus révéler d'informations ni interférer dans les débats en cours.</li>
+      </ul>
+  
   </div></div>
   
   <div id="modal-news" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-news')">✕</span><div class="news-tag" id="modal-news-tag">BULLETIN MATINAL</div><h2 id="modal-news-titre" style="color: #00ff66; margin-top: 5px;">[ TITRE ]</h2><hr style="border-color: #008b43;"><p id="modal-news-contenu" style="color: #ddd; line-height: 1.5;">[ TEXTE ]</p></div></div>
 
   <!-- MODALES DES FICHES DE RÔLES INDIVIDUELLES -->
-  <div id="modal-fiche-01" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-01')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧑‍⚕️ LES SCIENTIFIQUES</h2><hr style="border-color: #008b43;"><p><strong>Votre fonction :</strong> Soignant, scientifique ou employé du cabinet. Sain d'esprit.</p></div></div>
-  <div id="modal-fiche-02" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-02')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧑‍⚕️ LE DIRECTEUR DU CNDA</h2><hr style="border-color: #008b43;"><p><strong>🪪 Statut :</strong> Identité publique.</p></div></div>
+  <div id="modal-fiche-01" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-01')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧑‍⚕️ LES SCIENTIFIQUES</h2><hr style="border-color: #008b43;"><p><strong>Votre fonction :</strong> Soignant, scientifique ou employé du cabinet. Sain d'esprit.</p><p><strong>🎯 Objectif :</strong> Éliminer les menaces lors des votes.</p><p><strong>🕘 Journée :</strong> Participe aux débats et aux votes.</p><p><strong>🌙 Pouvoir Nocturne :</strong> Aucun pouvoir nocturne.</p></div></div>
+  <div id="modal-fiche-02" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-02')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧑‍⚕️ LE DIRECTEUR DU CNDA</h2><hr style="border-color: #008b43;"><p><strong>🪪 Statut :</strong> Identité publique.</p><p><strong>⚖️ Voix Prépondérante :</strong> Vote compte double.</p><p><strong>⚖️ Droit de Tranchage :</strong> Tranche en cas d'égalité lors des votes.</p><p><strong>🪪 Badge Haute Sécurité :</strong> Désigne un successeur lors de sa mort.</p></div></div>
   <div id="modal-fiche-03" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-03')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧑‍⚕️ FICHE 03 — INFIRMIER JUMEAU</h2><hr style="border-color: #008b43;"><p><strong>🤝 Lien de Confiance :</strong> Connaît dès le début l'identité de son jumeau soignant et son innocence.</p></div></div>
   <div id="modal-fiche-04" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-04')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🩻 FICHE 04 — RADIOLOGUE</h2><hr style="border-color: #008b43;"><p><strong>🩻 IRM Nocturne :</strong> Passe une IRM par nuit à un joueur pour découvrir son rôle exact.</p></div></div>
-  <div id="modal-fiche-05" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-05')">✕</span><h2 style="color: #00ff66; margin-top: 0;">💊 FICHE 05 — PHARMACIEN</h2><hr style="border-color: #008b43;"><p><strong>💉 Vaccin Préventif :</strong> Immunise un joueur des attaques pour 1 nuit (usage unique).</p></div></div>
-  <div id="modal-fiche-06" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-06')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🔒 FICHE 06 — RESPONSABLE QUARANTAINE</h2><hr style="border-color: #008b43;"><p><strong>🔒 Mise en confinement :</strong> Protège un joueur de toute mort nocturne.</p></div></div>
-  <div id="modal-fiche-07" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-07')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🗡️ FICHE 07 — CHIRURGIEN VÉTÉRAN</h2><hr style="border-color: #008b43;"><p><strong>☠️ Dernier Souffle :</strong> S'il est éliminé, emporte immédiatement un autre joueur avec lui.</p></div></div>
+  <div id="modal-fiche-05" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-05')">✕</span><h2 style="color: #00ff66; margin-top: 0;">💊 FICHE 05 — PHARMACIEN</h2><hr style="border-color: #008b43;"><p><strong>💉 Vaccin Préventif :</strong> Immunise un joueur des attaques pour 1 nuit (usage unique).</p><p><strong>☠️ Injection Létale :</strong> Élimine un joueur pendant la nuit (usage unique).</p></div></div>
+  <div id="modal-fiche-06" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-06')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🔒 FICHE 06 — RESPONSABLE QUARANTAINE</h2><hr style="border-color: #008b43;"><p><strong>🔒 Mise en confinement :</strong> Protège un joueur de toute mort nocturne, mais désactive son pouvoir nocturne pour la nuit.</p></div></div>
+  <div id="modal-fiche-07" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-07')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🗡️ FICHE 07 — CHIRURGIEN VÉTÉRAN</h2><hr style="border-color: #008b43;"><p><strong>☠️ Dernier Souffle :</strong> S'il est éliminé, emporte immédiatement un autre joueur avec lui (sans effet sur les Fantômes).</p></div></div>
   <div id="modal-fiche-08" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-08')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🌙 FICHE 08 — INFIRMIER DE GARDE</h2><hr style="border-color: #008b43;"><p><strong>👁️ Observation Nocturne :</strong> Reçoit chaque matin un indice sur les événements nocturnes.</p></div></div>
-  <div id="modal-fiche-09" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-09')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧬 FICHE 09 — VIROLOGISTE</h2><hr style="border-color: #008b43;"><p><strong>☣️ Sang Toxique :</strong> Immunisé contre les attaques des Infectés.</p></div></div>
-  <div id="modal-fiche-10" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-10')">✕</span><h2 style="color: #00ff66; margin-top: 0;">☣️ FICHE 10 — INFECTÉ</h2><hr style="border-color: #008b43;"><p><strong>🩸 Attaque Cannibale :</strong> Vote chaque nuit pour dévorer une victime.</p></div></div>
-  <div id="modal-fiche-11" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-11')">✕</span><h2 style="color: #00ff66; margin-top: 0;">☣️ FICHE 11 — PATIENT ZÉRO</h2><hr style="border-color: #008b43;"><p><strong>🧬 Inoculation Virale :</strong> Convertit la cible en Infecté.</p></div></div>
-  <div id="modal-fiche-12" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-12')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧛 FICHE 12 — VAMPIRE</h2><hr style="border-color: #008b43;"><p><strong>🩸 Morsure :</strong> Convertit les joueurs.</p></div></div>
-  <div id="modal-fiche-13" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-13')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧛 FICHE 13 — LE COMTE ALUCARD</h2><hr style="border-color: #008b43;"><p><strong>⚡ Morsure Foudroyante :</strong> Convertit en une nuit.</p></div></div>
-  <div id="modal-fiche-14" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-14')">✕</span><h2 style="color: #00ff66; margin-top: 0;">👻 FICHE 14 — FANTÔME INFILTRÉ</h2><hr style="border-color: #008b43;"><p><strong>🎯 Objectif :</strong> Récolter 9 âmes.</p></div></div>
+  <div id="modal-fiche-09" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-09')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧬 FICHE 09 — VIROLOGISTE</h2><hr style="border-color: #008b43;"><p><strong>☣️ Sang Toxique :</strong> Immunisé contre les attaques des Infectés et les conversions des Vampires.</p></div></div>
+  <div id="modal-fiche-10" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-10')">✕</span><h2 style="color: #00ff66; margin-top: 0;">☣️ FICHE 10 — INFECTÉ</h2><hr style="border-color: #008b43;"><p><strong>🩸 Attaque Cannibale :</strong> Vote chaque nuit sur le canal secret (#cnda-infectes) pour devorer une victime.</p></div></div>
+  <div id="modal-fiche-11" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-11')">✕</span><h2 style="color: #00ff66; margin-top: 0;">☣️ FICHE 11 — PATIENT ZÉRO</h2><hr style="border-color: #008b43;"><p><strong>🧬 Inoculation Virale :</strong> Une fois par partie, convertit la cible de l'attaque nocturne en Infecté au lieu de la tuer.</p></div></div>
+  <div id="modal-fiche-12" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-12')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧛 FICHE 12 — VAMPIRE</h2><hr style="border-color: #008b43;"><p><strong>🩸 Morsure :</strong> 1re morsure = Anémie. 2e morsure = Conversion dans le camp des Vampires.</p></div></div>
+  <div id="modal-fiche-13" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-13')">✕</span><h2 style="color: #00ff66; margin-top: 0;">🧛 FICHE 13 — LE COMTE ALUCARD</h2><hr style="border-color: #008b43;"><p><strong>⚡ Morsure Foudroyante :</strong> Convertit un joueur en une seule nuit (usage unique).</p><p><strong>⚖️ Droit de tranchage :</strong> Tranche les égalités des Vampires.</p></div></div>
+  <div id="modal-fiche-14" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal('modal-fiche-14')">✕</span><h2 style="color: #00ff66; margin-top: 0;">👻 FICHE 14 — FANTÔME INFILTRÉ</h2><hr style="border-color: #008b43;"><p><strong>🎯 Objectif :</strong> Récolter 9 âmes (3 Personnel, 3 Infectés, 3 Vampires) pour déclencher le Rituel d'Équilibre Macabre.</p><p><strong>🔮 Vulnérabilité :</strong> Seul le vote "RITUEL D'EXORCISME" peut l'éliminer.</p></div></div>
 
   <script>
     const baseDeDonnees = {
@@ -582,6 +638,7 @@
 
     let jourActuel = 1;
 
+    // FONCTION POUR GÉRER L'OUVERTURE/FERMETURE DU MENU BURGER SUR MOBILE
     function toggleBurgerMenu() {
       const navLinks = document.getElementById('nav-links');
       navLinks.classList.toggle('active');
@@ -890,12 +947,12 @@
       mettreAJourListesVotantEtCible();
     }
 
+    /* FONCTION MISE À JOUR AVEC LE BOUTON CÔTE À CÔTE */
     function afficherRecapVotes() {
       const codeSecret = "1234"; 
       const saisie = prompt("Entrez le code secret du C.N.D.A. pour afficher les votes :");
       
       if (saisie === null) return;
-
       if (saisie !== codeSecret) {
         alert("Accès refusé : Code secret erroné.");
         return;
@@ -908,15 +965,20 @@
       const votants = Object.keys(urnes);
       
       if (votants.length === 0) {
-        html += "<span style='color: #33ff99;'>Aucun vote enregistré pour l'instant.</span>";
+        html += "<span style='color: #33ff99;'>Aucun vote enregistré pour l'instant.</span><br>";
       } else {
         html += "<ul style='margin: 5px 0 10px 20px; padding: 0;'>";
         for (let votant of votants) {
           html += `<li>Agent <strong>${votant}</strong> a voté pour : <span style='color: #88ffbb;'>${urnes[votant]}</span></li>`;
         }
         html += "</ul>";
-        html += `<button onclick="telechargerExcelGlobal()" class="btn-standard" style="padding: 5px 10px; font-size: 0.75rem; background: #004a22; margin-top: 5px;">📥 Télécharger le classeur Excel</button>`;
       }
+      
+      // Conteneur flexible pour aligner les boutons côte à côte
+      html += `<div style="display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap;">`;
+      html += `<button onclick="telechargerExcelGlobal()" class="btn-standard" style="padding: 5px 10px; font-size: 0.75rem; background: #004a22; margin: 0;">📥 Télécharger le classeur Excel</button>`;
+      html += `<button id="btn-reset-votes" onclick="reinitialiserVotesStockes()" class="btn-standard" disabled style="padding: 5px 10px; font-size: 0.75rem; background: #555; border-color: #888; color: #aaa; margin: 0; opacity: 0.5; cursor: not-allowed;">🗑️ Réinitialiser les votes</button>`;
+      html += `</div>`;
       
       containerVotes.innerHTML = html;
       containerVotes.style.display = containerVotes.style.display === 'none' ? 'block' : 'none';
@@ -933,14 +995,36 @@
       
       let ws = XLSX.utils.aoa_to_sheet(wsData);
       XLSX.utils.book_append_sheet(wb, ws, "Jour " + jourActuel);
-      
       XLSX.writeFile(wb, "Votes_CNDA_Jour_" + jourActuel + ".xlsx");
+
+      // Activation instantanée du bouton de réinitialisation après téléchargement
+      const btnReset = document.getElementById('btn-reset-votes');
+      if (btnReset) {
+        btnReset.disabled = false;
+        btnReset.style.background = "#8b0000";
+        btnReset.style.borderColor = "#ff3333";
+        btnReset.style.color = "#fff";
+        btnReset.style.opacity = "1";
+        btnReset.style.cursor = "pointer";
+      }
+    }
+
+    function reinitialiserVotesStockes() {
+      const btnReset = document.getElementById('btn-reset-votes');
+      if (btnReset && btnReset.disabled) return; 
+
+      if (confirm("Êtes-vous sûr de vouloir effacer tous les votes enregistrés pour ce jour ? Cette action est irréversible.")) {
+        localStorage.removeItem('cnda_votes_jour');
+        alert("Les votes ont été réinitialisés avec succès.");
+        afficherRecapVotes(); 
+      }
     }
 
     window.addEventListener('DOMContentLoaded', initialiserPage);
 
     function lancerScreamer(event) {
       event.stopPropagation();
+
       document.getElementById('heartbeat-sound').pause();
 
       const musicRevelation = document.getElementById('music-revelation');
@@ -963,6 +1047,7 @@
         if (screamerBox.style.display !== 'none') {
           screamerVideo.pause();
           screamerBox.style.display = 'none';
+          
           document.getElementById('revelation').style.display = 'flex';
           
           revealSound.volume = 1.0;
@@ -978,6 +1063,7 @@
 
     function lancerSecondScreamer(event) {
       event.stopPropagation();
+
       const sHeart = document.getElementById('second-heartbeat-sound');
       if(sHeart) sHeart.pause();
 
@@ -1003,11 +1089,12 @@
         if (secondScreamerBox.style.display !== 'none') {
           if(secondScreamerVideo) secondScreamerVideo.pause();
           secondScreamerBox.style.display = 'none';
+          
           document.getElementById('second-revelation').style.display = 'flex';
           
           if(secondRevealSound) {
             secondRevealSound.volume = 1.0;
-            secondRevealSound.play().catch(e => console.log("Audio secondaire bloqué :", e));
+            secondRevealSound.play().catch(e => console.log("Audio de révélation secondaire bloqué :", e));
           }
 
           setTimeout(() => {
